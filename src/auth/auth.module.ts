@@ -4,6 +4,8 @@ import { AuthController } from './auth.controller';
 import { AuthRepository } from './auth.repository';
 import { ProducerService } from 'src/producerKafka/producer.service';
 
+
+
 @Module({
   controllers: [AuthController],
   providers: [AuthService,AuthRepository,ProducerService],

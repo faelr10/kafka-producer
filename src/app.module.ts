@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { ClientsModule } from '@nestjs/microservices';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,8 +13,8 @@ const kafkaImport = ClientsModule.register([
 ]);
 kafkaImport.global = true;
 @Module({
-  imports: [AuthModule,ProducerModule,kafkaImport],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, ProducerModule, kafkaImport],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

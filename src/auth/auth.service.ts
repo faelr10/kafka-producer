@@ -14,15 +14,27 @@ export class AuthService implements IAuthService {
 
     async login(loginDto: LoginAuthDto): Promise<string> {
 
-        this.producer.sendMessage('login', {
-            key: Math.random() + '',
-            value: loginDto.email,
-        }).subscribe((reply) => {
-            console.log('Conteúdo do reply:', reply);
-        }
-        );
+        this.producer.sendMessage('logger', {
+            key: 'id',
+            value: `${loginDto.email}:login`
+        }).subscribe(() => {
+            console.log('Message sent');
+        })
 
-        return 'token';
+        return 'login';
+
+    }
+
+    async logout(email: string): Promise<string> {
+
+        const value = `${email}:logout`;
+        this.producer.sendMessage('logger', {
+            key: 'id',
+            value
+        }).subscribe()
+
+        return 'logout';
+
     }
 
 }
