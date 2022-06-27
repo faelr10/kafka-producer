@@ -14,6 +14,8 @@ export class AuthService implements IAuthService {
 
     async login(loginDto: LoginAuthDto): Promise<string> {
 
+        //usuario fez login no sistema
+
         this.producer.sendMessage('logger', {
             key: 'id',
             value: `${loginDto.email}:login`
@@ -26,6 +28,9 @@ export class AuthService implements IAuthService {
     }
 
     async logout(email: string): Promise<string> {
+
+        //usuario fez logout no sistema
+
 
         const value = `${email}:logout`;
         this.producer.sendMessage('logger', {
